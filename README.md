@@ -1,4 +1,4 @@
-# Kubernetes Logging with Fluent Bit
+# Openshift Kubernetes Logging with Fluent Bit
 
 
 
@@ -15,16 +15,16 @@ This repository contains a set of Yaml files to deploy Fluent Bit which consider
 [Fluent Bit](http://fluentbit.io) must be deployed as a DaemonSet so that it will be available on every node of your Kubernetes cluster. To get started run the following commands to create the namespace, service account and role setup:
 
 ```
-$ kubectl create namespace logging
-$ kubectl create -f https://raw.githubusercontent.com/fluent/fluent-bit-kubernetes-logging/master/fluent-bit-service-account.yaml
-$ kubectl create -f https://raw.githubusercontent.com/fluent/fluent-bit-kubernetes-logging/master/fluent-bit-role.yaml
-$ kubectl create -f https://raw.githubusercontent.com/fluent/fluent-bit-kubernetes-logging/master/fluent-bit-role-binding.yaml
+$ oc create namespace logging
+$ oc create -f https://github.com/RebeiMohamedJawher/EFK_stack_on_openshift/blob/main/fluent-bit-service-account.yaml
+$ oc create -f https://github.com/RebeiMohamedJawher/EFK_stack_on_openshift/blob/main/fluent-bit-role.yaml
+$ oc create -f https://github.com/RebeiMohamedJawher/EFK_stack_on_openshift/blob/main/fluent-bit-role-binding.yaml
 ```
 
 If you are deploying fluent-bit on openshift, you additionally need to run:
 
 ```
-$ kubectl create -f https://raw.githubusercontent.com/fluent/fluent-bit-kubernetes-logging/master/fluent-bit-openshift-security-context-constraints.yaml
+$ oc create -f https://github.com/RebeiMohamedJawher/EFK_stack_on_openshift/blob/main/fluent-bit-openshift-security-context-constraints.yaml
 ```
 
 #### Fluent Bit to Elasticsearch
@@ -32,7 +32,7 @@ $ kubectl create -f https://raw.githubusercontent.com/fluent/fluent-bit-kubernet
 The next step is to create a ConfigMap that will be used by our Fluent Bit DaemonSet:
 
 ```
-$ kubectl create -f https://raw.githubusercontent.com/fluent/fluent-bit-kubernetes-logging/master/output/elasticsearch/fluent-bit-configmap.yaml
+$ oc create -f https://github.com/RebeiMohamedJawher/EFK_stack_on_openshift/blob/main/output/elasticsearch/fluent-bit-configmap.yaml
 ```
 
 If the cluster uses a CRI runtime, like containerd or CRI-O, change the `Parser` described in `input-kubernetes.conf` from docker to cri.
@@ -40,7 +40,7 @@ If the cluster uses a CRI runtime, like containerd or CRI-O, change the `Parser`
 Fluent Bit DaemonSet ready to be used with Elasticsearch on a normal Kubernetes Cluster:
 
 ```
-$ kubectl create -f https://raw.githubusercontent.com/fluent/fluent-bit-kubernetes-logging/master/output/elasticsearch/fluent-bit-ds.yaml
+$ oc create -f https://github.com/RebeiMohamedJawher/EFK_stack_on_openshift/blob/main/output/elasticsearch/fluent-bit-ds.yaml
 ```
 
 #### Fluent Bit to Elasticsearch on Minikube
@@ -48,7 +48,7 @@ $ kubectl create -f https://raw.githubusercontent.com/fluent/fluent-bit-kubernet
 If you are using Minikube for testing purposes, use the following alternative DaemonSet manifest:
 
 ```
-$ kubectl create -f https://raw.githubusercontent.com/fluent/fluent-bit-kubernetes-logging/master/output/elasticsearch/fluent-bit-ds-minikube.yaml
+$ oc create -f https://github.com/RebeiMohamedJawher/EFK_stack_on_openshift/blob/main/output/elasticsearch/fluent-bit-ds-minikube.yaml
 ```
 
 #### Fluent Bit to Kafka
@@ -56,13 +56,13 @@ $ kubectl create -f https://raw.githubusercontent.com/fluent/fluent-bit-kubernet
 Create a ConfigMap that will be used by our Fluent Bit DaemonSet:
 
 ```
-$ kubectl create -f https://raw.githubusercontent.com/fluent/fluent-bit-kubernetes-logging/master/output/kafka/fluent-bit-configmap.yaml
+$ oc create -f https://github.com/RebeiMohamedJawher/EFK_stack_on_openshift/blob/main/output/kafka/fluent-bit-configmap.yaml
 ```
 
 Fluent Bit DaemonSet ready to be used with Kafka on a normal Kubernetes Cluster:
 
 ```
-$ kubectl create -f https://raw.githubusercontent.com/fluent/fluent-bit-kubernetes-logging/master/output/kafka/fluent-bit-ds.yaml
+$ oc create -f https://github.com/RebeiMohamedJawher/EFK_stack_on_openshift/blob/main/output/kafka/fluent-bit-ds.yaml
 ```
 
 #### Fluent Bit to Elasticsearch on Minikube
@@ -70,7 +70,7 @@ $ kubectl create -f https://raw.githubusercontent.com/fluent/fluent-bit-kubernet
 If you are using Minikube for testing purposes, use the following alternative DaemonSet manifest:
 
 ```
-$ kubectl create -f https://raw.githubusercontent.com/fluent/fluent-bit-kubernetes-logging/master/output/elasticsearch/fluent-bit-ds-minikube.yaml
+$ oc create -f https://github.com/RebeiMohamedJawher/EFK_stack_on_openshift/blob/main/output/elasticsearch/fluent-bit-ds-minikube.yaml
 ```
 
 ## Details
