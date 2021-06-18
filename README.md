@@ -42,37 +42,6 @@ Fluent Bit DaemonSet ready to be used with Elasticsearch on a normal Kubernetes 
 ```
 $ oc create -f https://github.com/RebeiMohamedJawher/EFK_stack_on_openshift/blob/main/output/elasticsearch/fluent-bit-ds.yaml
 ```
-
-#### Fluent Bit to Elasticsearch on Minikube
-
-If you are using Minikube for testing purposes, use the following alternative DaemonSet manifest:
-
-```
-$ oc create -f https://github.com/RebeiMohamedJawher/EFK_stack_on_openshift/blob/main/output/elasticsearch/fluent-bit-ds-minikube.yaml
-```
-
-#### Fluent Bit to Kafka
-
-Create a ConfigMap that will be used by our Fluent Bit DaemonSet:
-
-```
-$ oc create -f https://github.com/RebeiMohamedJawher/EFK_stack_on_openshift/blob/main/output/kafka/fluent-bit-configmap.yaml
-```
-
-Fluent Bit DaemonSet ready to be used with Kafka on a normal Kubernetes Cluster:
-
-```
-$ oc create -f https://github.com/RebeiMohamedJawher/EFK_stack_on_openshift/blob/main/output/kafka/fluent-bit-ds.yaml
-```
-
-#### Fluent Bit to Elasticsearch on Minikube
-
-If you are using Minikube for testing purposes, use the following alternative DaemonSet manifest:
-
-```
-$ oc create -f https://github.com/RebeiMohamedJawher/EFK_stack_on_openshift/blob/main/output/elasticsearch/fluent-bit-ds-minikube.yaml
-```
-
 ## Details
 
 The default configuration of Fluent Bit makes sure of the following:
