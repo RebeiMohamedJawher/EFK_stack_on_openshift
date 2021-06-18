@@ -6,13 +6,13 @@
 
 - Read Kubernetes/Docker log files from the file system or through systemd Journal
 - Enrich logs with Kubernetes metadata
-- Deliver logs to third party storage services like Elasticsearch, InfluxDB, HTTP, etc.
+- Deliver logs to third party storage services like Elasticsearch.
 
 This repository contains a set of Yaml files to deploy Fluent Bit which consider namespace, RBAC, Service Account, etc.
 
 ## Getting started
 
-[Fluent Bit](http://fluentbit.io) must be deployed as a DaemonSet so that it will be available on every node of your Kubernetes cluster. To get started run the following commands to create the namespace, service account and role setup:
+[Fluent Bit](http://fluentbit.io) must be deployed as a DaemonSet so that it will be available on Openshift Kubernetes cluster. To get started run the following commands to create the namespace, service account and role setup:
 
 ```
 $ oc create namespace logging
@@ -35,8 +35,6 @@ The next step is to create a ConfigMap that will be used by our Fluent Bit Daemo
 $ oc create -f https://github.com/RebeiMohamedJawher/EFK_stack_on_openshift/blob/main/output/elasticsearch/fluent-bit-configmap.yaml
 ```
 
-If the cluster uses a CRI runtime, like containerd or CRI-O, change the `Parser` described in `input-kubernetes.conf` from docker to cri.
-
 Fluent Bit DaemonSet ready to be used with Elasticsearch on a normal Kubernetes Cluster:
 
 ```
@@ -47,7 +45,6 @@ $ oc create -f https://github.com/RebeiMohamedJawher/EFK_stack_on_openshift/blob
 The default configuration of Fluent Bit makes sure of the following:
 
 - Consume all containers logs from the running Node.
-- The [Tail input plugin](http://fluentbit.io/documentation/0.12/input/tail.html) will not append more than __5MB__  into the engine until they are flushed to the Elasticsearch backend. This limit aims to provide a workaround for [backpressure](http://fluentbit.io/documentation/0.13/configuration/backpressure.html) scenarios.
-- The Kubernetes filter will enrich the logs with Kubernetes metadata, specifically _labels_ and _annotations_. The filter only goes to the API Server when it cannot find the cached info, otherwise it uses the cache.
-- The default backend in the configuration is Elasticsearch set by the [Elasticsearch Output Plugin](http://fluentbit.io/documentation/0.13/output/elasticsearch.html). It uses the Logstash format to ingest the logs. If you need a different Index and Type, please refer to the plugin option and do your own adjustments.
+- The Kubernetes filter will enrich the logs with Kubernetes metadata, specifically _labels_ and _annotations_. 
+- The default backend in the configuration is Elasticsearch set by the Elasticsearch. 
 - There is an option called __Retry_Limit__ set to False that means if Fluent Bit cannot flush the records to Elasticsearch it will re-try indefinitely until it succeeds.
